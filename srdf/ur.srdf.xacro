@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="$(arg name)">
+
+  <!-- robot name parameter -->
+  <xacro:arg name="name_ur" default="ur"/>
+  <!-- gripper name parameter -->
+  <xacro:arg name="name_robotiq" default="robotiq"/>
+  <!-- parameters -->
+  <xacro:arg name="prefix" default="" />
+
+  <xacro:include filename="$(find ur_moveit_config)/srdf/ur_macro.srdf.xacro"/>
+  <xacro:include filename="$(find ifl_air_arm_api_launch)/srdf/robotiq_macro.srdf.xacro"/>
+
+  <xacro:ur_srdf name="$(arg name_ur)" prefix="$(arg prefix)"/>
+  
+  <xacro:robotiq_srdf name="$(arg name_robotiq)" prefix="$(arg prefix)"/>
+  
+  <disable_collisions link1="ur_to_robotiq_joint" link2="wrist_3_link" reason="Adjacent" />
+
+</robot>

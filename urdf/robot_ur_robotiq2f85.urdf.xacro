@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://wiki.ros.org/xacro" name="robot_ur_robotiq2f85">
+  
+  <!-- Import macros -->
+  <xacro:include filename="$(find ifl_air_arm_api_launch)/urdf/ur_robotiq2f85_macro.urdf.xacro"/>
+  <xacro:include filename="$(find ifl_air_arm_api_launch)/urdf/robottable_800x1400_macro.urdf.xacro"/>
+  
+
+  <!-- create link fixed to the "world" -->
+  <link name="world" />
+
+  <!-- <xacro:arg name="joint_limit_params" default="$(find ifl_air_arm_api_moveit_config)/config/joint_limits.yaml"/> -->
+
+  <xacro:robottable_800x1400 prefix="" parent="world">
+    <origin xyz="0.0 0.0 -0.375" rpy="0 0 0"/>
+  </xacro:robottable_800x1400>
+
+  <xacro:ur_robotiq prefix="" parent="world">
+    <origin xyz="0.0 0.0 0" rpy="0 0 0"/>
+  </xacro:ur_robotiq>
+
+</robot>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<robot xmlns:xacro="http://ros.org/wiki/xacro">
+  <xacro:macro name="ur_mountingplate" params="prefix parent child *origin">
+
+    <joint name="${prefix}ur_mountingplate_joint" type="fixed">
+      <!-- The parent link must be read from the robot model it is attached to. -->
+      <parent link="${parent}"/>
+      <child link="${prefix}ur_mountingplate_link"/>
+      <xacro:insert_block name="origin"/>
+    </joint>
+
+    <link name="${prefix}ur_mountingplate_link">
+        <visual>
+          <origin xyz="0 0 0.0125" rpy="0 0 0" />
+          <geometry>
+            <box size="0.2 0.2 0.025"/>
+          </geometry>
+          <material name="gray">
+            <color rgba="0.5 0.5 0.5 0.9"/>
+          </material>
+        </visual>
+        <collision>
+          <origin xyz="0 0 0.0125" rpy="0 0 0"/>
+          <geometry>
+            <box size="0.2 0.2 0.025"/>
+          </geometry>
+        </collision>
+    </link>
+
+    <joint name="${prefix}ur_mountingplate_base_joint" type="fixed">
+      <parent link="${prefix}ur_mountingplate_link"/>
+      <child link="${child}"/>
+      <origin xyz="0 0 0.025" rpy="0 0 0"/>
+    </joint>
+    <link name="${child}"/>
+
+  </xacro:macro>
+</robot>
